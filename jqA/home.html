@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>    
+                $(document).ready(function(){
+                    $("#btn").click(function(){
+                        $("#test").load("/datafile", function(responseTxt, statusTxt, xhr){ // localhost:3000/datafile
+                            if(statusTxt == "success")
+                            console.log("External content loaded successfully!");
+                            if(statusTxt == "error")
+                            console.log("Error: " + xhr.status + ": " + xhr.statusText);
+                        });
+                    });
+                }); 
+        </script> 
+    </head>
+<body>
+<h2>HTML Forms</h2>
+<form  method="post" action="/addname">
+  First name:<br>
+  <input type="text" id="name" name="firstname">
+  <br>
+  Last name:<br>
+  <input type="text" id="lname" name="lastname">
+  <br><br>
+  <input  type="submit" value="Submit">
+  <input  type="reset" value="Reset">
+</form>  
+<div id="test">
+        <p>This is first Content!</p>
+</div>
+<button id="btn">
+    Click to change
+</button>
+<div id="data">
+        <p>data from monogo</p>
+</div>
+<button id="btndata">
+    Get data
+</button>
+</body>
+</html>
