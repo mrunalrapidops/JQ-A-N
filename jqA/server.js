@@ -2,14 +2,16 @@ var fs =require('fs');
 var readme = fs.readFileSync('./Externalfile/data.txt','utf-8');
 var express = require("express");
 var mongoose = require("mongoose");
+var bodyParser = require('body-parser');
+var cors = require("cors");
 mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/node-demo",{ useNewUrlParser: true });
 var nameSchema = new mongoose.Schema({
     firstName: String,
     lastNameName: String
    });
+mongoose.set('useFindAndModify', false);
 var User = mongoose.model("User", nameSchema);
 
-var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,6 +28,7 @@ app.get("/", (req, res) => {
 app.get("/getdata", (req, res) => {
     User.find({}, function(err, data){
         res.send(req.body);
+       // res.send(data);
         console.log(">>>> " + data );
     });
 });
@@ -42,30 +45,56 @@ app.post("/addname", (req, res) => {
     });
    });
 
-app.delete("/delete/:id", (req, res) => {
-    console.log(req.params['id']);
-    console.log(req.query);
-   User.findOneAndDelete({ _id: req.params.id }, function(err) {
-       console.log(JSON.stringify(req.params));
-    //    console.log("req.params.id:"+req.params.id);
-    //    console.log("req.params:"+req.params); 
+  app.delete("/delete", (req, res) => {
+    /* console.log(req.body.id);*/
+    /* in postman body->x-www-form-urlencoded->give id and value */
+   User.findOneAndDelete({ _id: req.body.id}, function(err) {
+      //console.log(JSON.stringify(req.params));
+      if (!err) {
+          res.send("item delete from database");
+      }
+      else {
+          res.send("item not delete from database");
+      }
+    });
+  });
+
+  app.put("/update", (req, res) => {
+  //var myData = new User(req.body);
+    User.findOneAndUpdate({ _id: req.body.id},{$set: {firstName:req.body.firstName,lastNameName:req.body.lastNameName}}, function(err) {
     if (!err) {
-        res.send("item delete from database");
-    }
-    else {
-        res.send("item not delete from database");
-    }
-});
-});
+        res.send("item update in database");
+      }
+      else {
+          res.send("item not update in database");
+      }
+    });
+  });
 app.listen(port, () => {
  console.log("Server listening on port " + port);
 });
 
-   //reff
-   //https://codeburst.io/writing-a-crud-app-with-node-js-and-mongodb-e0827cbbdafb
-   //https://codeburst.io/hitchhikers-guide-to-back-end-development-with-examples-3f97c70e0073
-   //https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
- 
+  
+   /* console.log(req.params.id);
+    console.log(req.params['id']); */
+    /* req.params => use when we send with URL */
+    /* req.body => use when we send as body */
+    /* req.query */ 
+    /* working with req.params['id'] */
+/* app.delete("/delete/:id", (req, res) => {
+    console.log(req.params['id']);
+    console.log(req.query);
+   User.findOneAndDelete({ _id: req.params.id }, function(err) {
+      console.log(JSON.stringify(req.params));
+      if (!err) {
+          res.send("item delete from database");
+      }
+      else {
+          res.send("item not delete from database");
+      }
+    });
+  });
+ */
 
 /*
 MVC
