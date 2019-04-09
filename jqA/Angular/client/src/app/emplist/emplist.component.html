@@ -1,9 +1,29 @@
 <div class="container">
-  <div *ngFor = "let emp of emp">
-      <hr>
-    <div class="col-md-12">
-      {{emp.firstName}}
-      {{emp.lastNameName}}
-      <hr>
+  <h3 class="page-header">Add Employee</h3>
+  <form (submit) = "addEmp()" >
+    <div class="form-group">
+      <label>First name</label>
+      <input type="text" [(ngModel)] = "firstName" name="firstName" class="form-control">
     </div>
+    <div class="form-group">
+        <label>Last name</label>
+        <input type="text" [(ngModel)] = "lastNameName" name="lastName" class="form-control">
+      </div>
+      <input type="submit" class = "btn btn btn-success" value="Add">
+  </form>
+</div>
+
+<div class="container">  
+  <div *ngFor = "let emp of emp">
+      <hr> 
+    <div class="col-md-3">
+      {{emp.firstName}}
+    </div>
+    <div class="col-md-3">
+        {{emp.lastNameName}}
+    </div>
+    <div class="col-md-6">
+      <input type="button" (click)="deleteEmp(emp._id)" value="Delete" class="btn btn-danger">
+    </div>
+    <hr><hr>
   </div>

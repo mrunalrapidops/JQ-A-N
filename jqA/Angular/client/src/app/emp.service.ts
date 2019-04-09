@@ -24,12 +24,13 @@ export class EmpService {
   addEmp(newEmp)
   {
     var headers = new Headers();
-   /*  headers.append('Content-Type', 'application/json');
+    /* headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     headers.append('Origin','http://localhost:3000'); */
     
     return this.http.post('http://localhost:3000/addname',newEmp,{headers:headers})
     .map(res => res.json());
+    //location.reload(true);
   }
   deleteEmp(id)
   {

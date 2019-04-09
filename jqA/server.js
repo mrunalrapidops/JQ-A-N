@@ -14,8 +14,10 @@ mongoose.set('useFindAndModify', false);
 var User = mongoose.model("User", nameSchema);
 
 var app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors()) // Use this after the variable declaration
 var port = 3000;
 
 app.get("/datafile", (req, res) => {
@@ -23,11 +25,12 @@ app.get("/datafile", (req, res) => {
 });  
 
 app.get("/", (req, res) => {
-    /* app.use(cors()) // Use this after the variable declaration */
+    app.use(cors()) // Use this after the variable declaration
     res.sendFile(__dirname + "/home.html"); 
 });
 
 app.get("/getdata", (req, res) => {
+
     User.find({}, function(err, data){
       res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
       //res.send(req.body);
@@ -39,9 +42,15 @@ app.get("/getdata", (req, res) => {
 
 
 app.post("/addname", (req, res) => {
-    var myData = new User(req.body);
+  
+    /* var myData = new User(req.body); */
+    var myData = new User({
+      firstName: req.body.firstName,
+      lastNameName: req.body.lastNameName
+    });
     myData.save()
     .then(item => {
+    res.json({msg:"item saved to database"});  
     res.send("item saved to database");
     })
     .catch(err => {
@@ -56,9 +65,11 @@ app.post("/addname", (req, res) => {
       //console.log(JSON.stringify(req.params));
       if (!err) {
           res.send("item delete from database");
+          res.json({msg:"item saved to database"});  
       }
       else {
           res.send("item not delete from database");
+          res.json({msg:"item not saved to database"});
       }
     });
   });
