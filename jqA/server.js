@@ -3,7 +3,8 @@ var readme = fs.readFileSync('./Externalfile/data.txt','utf-8');
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require('body-parser');
-var cors = require("cors");
+//var cors = require("cors");
+var cors = require('cors');
 mongoose.Promise = global.Promise;mongoose.connect("mongodb://localhost:27017/node-demo",{ useNewUrlParser: true });
 var nameSchema = new mongoose.Schema({
     firstName: String,
@@ -22,12 +23,15 @@ app.get("/datafile", (req, res) => {
 });  
 
 app.get("/", (req, res) => {
+    /* app.use(cors()) // Use this after the variable declaration */
     res.sendFile(__dirname + "/home.html"); 
 });
 
 app.get("/getdata", (req, res) => {
     User.find({}, function(err, data){
-        res.send(req.body);
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+      //res.send(req.body);
+      res.json(data);
        // res.send(data);
         console.log(">>>> " + data );
     });
