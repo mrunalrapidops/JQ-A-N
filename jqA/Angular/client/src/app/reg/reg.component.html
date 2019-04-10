@@ -1,0 +1,78 @@
+<p>
+  reg works!
+</p>
+<form action="/reg.html">
+  <div class="container">
+    <h1>Register</h1>
+    
+    <hr>
+    <label for="Name"><b>Name</b></label>
+    <input type="text" placeholder="First" name="email" required>
+    <input type="text" placeholder="Middle" name="email" required>
+    <input type="text" placeholder="Last" name="email" required>
+    
+    <label for="Bod"><b>Birthdate</b></label>
+    <select>
+      <option value="volvo">Date</option>
+    </select>
+    <select>
+      <option value="volvo">Month</option>
+    </select>
+    <select>
+      <option value="volvo">Year</option>
+    </select>
+    <br> <br>
+
+    <label for="Bod"><b>Address</b></label>
+    <input type="text" placeholder="Enter Street Address" name="sa">
+    <input type="text" placeholder="ZipCode" name="sa">
+    <select>
+      <option value="volvo">city</option>
+    </select>
+    <select>
+      <option value="volvo">Country</option>
+    </select>
+    <br> <br>
+    <label for="Bod"><b>Mobile Number</b></label><br>
+    <select>
+      <option value="volvo">+91</option>
+    </select>
+    <input type="text" placeholder="Mobile Number" name="sa">
+     
+    <label for="Gender"><b>Gender</b></label><br>
+    <input type="radio" name="gender" value="male"> Male<br>
+    <input type="radio" name="gender" value="female"> Female<br>
+    <input type="radio" name="gender" value="other"> Other
+    <br> <br>
+    
+    <label for="Gender"><b>Hobby</b></label><br>
+    <input type="checkbox" name="vehicle1" value="Bike">Traveling<br>
+    <input type="checkbox" name="vehicle2" value="Car">Rading<br>
+    <input type="checkbox" name="vehicle3" value="Boat" checked>Gaming<br> 
+    <br> <br>
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+<br>
+<label for="files" class="btn">Select Profile image</label>
+<input type="file" name="pic" accept="image/*" value="upload Profile pic"><br>
+<img id="blah" src="#" alt="your image Display hear" />
+<br>
+<label for="psw"><b>Message</b></label>
+<textarea rows="4" cols="50">
+
+</textarea> 
+<br>
+    <button type="submit" class="registerbtn">Register</button>
+    <button type="reset" class="resetbtn">Reset</button>
+  </div>
+
+  <div class="container signin">
+    <p>Already have an account? <a href="login.html">login</a>.</p>
+  </div>
+</form>

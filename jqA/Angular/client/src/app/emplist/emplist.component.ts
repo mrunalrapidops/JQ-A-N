@@ -36,8 +36,7 @@ lastNameName: String;
         console.log(`${i._id} mil gaya `);
     });
     this.EmpService.deleteEmp(id).subscribe(data =>{
-      //console.log("hello");
-    this.EmpService.getEmp().subscribe(emp => this.emp = emp);
+      this.EmpService.getEmp().subscribe(emp => this.emp = emp);
     })
 }
 

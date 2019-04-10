@@ -1,0 +1,29 @@
+<div class="container">
+    <h3 class="page-header">Login</h3>
+    <form (submit) = "addEmp()" >
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" [(ngModel)] = "username" name="firstName" class="form-control">
+      </div>
+      <div class="form-group">
+          <label>password</label>
+          <input type="text" [(ngModel)] = "password" name="password" class="form-control">
+      </div>
+      <div class="form-group">
+          <input type="checkbox" id="myCheck"> Show password  <br>
+          <input type="checkbox" id="myCheck"  onclick="setcook()"> Keep me login for 30days<br>
+      </div>
+      <div class="form-group container signin">
+          <p><a href="reg.html">Forgot Password? </a></p>
+          <p><a href="reg.html">Change Password? </a></p>
+        <p>New Account? then Register first <a href="reg.html">Sign in</a>.</p>
+        <br>OR
+      </div>
+      <div class="container signin"> 
+          <button class="loginBtn loginBtn--google" onclick="window.location.href='/auth/google'">Login with Google</button>
+          <button class="loginBtn loginBtn--facebook" onclick="window.location.href='/auth/google'">Login with Facebook</button>
+          <button class="loginBtn loginBtn--git"><i class="fab fa-github-square icon-2x"></i>Login with Github</button>
+          <button class="loginBtn loginBtn--mail"><i class="far fa-envelope icon-2x"></i>Login with Mail</button>
+     </div>
+    </form>
+</div>
