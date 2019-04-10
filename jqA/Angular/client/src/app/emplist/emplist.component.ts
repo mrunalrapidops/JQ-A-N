@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EmpService} from '../emp.service';;
 import {Emp} from '../emp';
-import { empty } from 'rxjs';
+
 
 @Component({
   selector: 'app-emplist',
@@ -10,8 +10,8 @@ import { empty } from 'rxjs';
   providers:[EmpService]
 })
 export class EmplistComponent implements OnInit {
-emps:Emp[];
-emp:Emp;
+emps:Emp[] = [];
+emp:Emp[];
 firstName: String;
 lastNameName: String;  
   constructor(private EmpService:EmpService) { }
@@ -23,27 +23,56 @@ lastNameName: String;
     }
     this.EmpService.addEmp(newEmp).subscribe(emp =>{
       this.emps.push(emp);
+      console.log(this.emps[0]);
       this.EmpService.getEmp().subscribe(emp => this.emp = emp);
     }); 
-    
   }
 
   deleteEmp(id:any){
-    var empno = this.emps;
+    console.log(this.emp);
+    console.log("from delete"+this.emp[0]._id);
+    this.emp.forEach(i => {
+      if(id ===  i._id)
+        console.log(`${i._id} mil gaya `);
+    });
     this.EmpService.deleteEmp(id).subscribe(data =>{
-      if(data.n==1){
-        for(var i=0;i<empno.length;i++){
-          if(empno[i]._id == id){
-            empno.splice(i,1);
-          }
-        }
-      }
+      //console.log("hello");
+    this.EmpService.getEmp().subscribe(emp => this.emp = emp);
     })
-  }
+}
 
   ngOnInit() {
-    //retrive data
-    this.EmpService.getEmp().subscribe(emp => this.emp = emp);
+    this.EmpService.getEmp().subscribe((emp : any) => {
+      this.emp = emp;
+      console.log(emp);
+    }); 
+    }
   }
-
-}
+  //console.log(id);
+    // var emps = this.emps;// get data in array
+    // emps.forEach(emps => {
+    //   console.log(emps);
+    // });
+    // console.log(emps);
+    /* console.log(emps);
+    console.log(id);
+    //console.log(this.emps[0]._id);
+    if(id == emps[0]._id){
+      console.log("get id");
+    }
+    else{
+      console.log("not get id");
+    } */
+    /* this.EmpService.deleteEmp(id).subscribe(data =>{
+      if(data.n==1){
+      console.log("get data");
+      for(var i = 0;i<emps.length;i++){
+        if(emps[i]._id == id){
+            emps.splice(i,1);
+        }
+      }
+    }
+    else{
+      console.log("data not found");
+    }
+  }) */

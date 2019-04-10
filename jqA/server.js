@@ -51,24 +51,21 @@ app.post("/addname", (req, res) => {
     myData.save()
     .then(item => {
     res.json({msg:"item saved to database"});  
-    res.send("item saved to database");
+   // res.send("item saved to database");
     })
     .catch(err => {
     res.status(400).send("unable to save to database");
     });
    });
 
-  app.delete("/delete", (req, res) => {
-    /* console.log(req.body.id);*/
-    /* in postman body->x-www-form-urlencoded->give id and value */
-   User.findOneAndDelete({ _id: req.body.id}, function(err) {
-      //console.log(JSON.stringify(req.params));
+  app.delete("/delete/:id", (req, res) => {
+   User.findOneAndDelete({ _id: req.params.id}, function(err) {
       if (!err) {
-          res.send("item delete from database");
+         // res.send("item delete from database");
           res.json({msg:"item saved to database"});  
       }
       else {
-          res.send("item not delete from database");
+          //res.send("item not delete from database");
           res.json({msg:"item not saved to database"});
       }
     });
@@ -88,7 +85,9 @@ app.post("/addname", (req, res) => {
 app.listen(port, () => {
  console.log("Server listening on port " + port);
 });
-
+//console.log(JSON.stringify(req.params));
+ /* console.log(req.body.id);*/
+    /* in postman body->x-www-form-urlencoded->give id and value */
   
    /* console.log(req.params.id);
     console.log(req.params['id']); */
@@ -151,17 +150,14 @@ app.listen(port, () => {
 /* var express = require('express')
 var bodyParser = require('body-parser')
 var Post = require('./models/post')
-
 var app = express()
 app.use(bodyParser.json())
-
 app.get('/api/posts', function (req, res, next) {
   Post.find(function(err, posts) {
     if (err) { return next(err) }
     res.json(posts)
   })
 })
-
 app.post('/api/posts', function (req, res, next) {
   var post = new Post({
     username: req.body.username,
@@ -172,8 +168,6 @@ app.post('/api/posts', function (req, res, next) {
     res.json(201, post)
   })
 })
-
 app.listen(3000, function () {
   console.log('Server listening on', 3000)
 }) */
-

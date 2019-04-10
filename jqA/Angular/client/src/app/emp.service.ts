@@ -34,7 +34,7 @@ export class EmpService {
   }
   deleteEmp(id)
   {
-    return this.http.delete('http://localhost:3000/delete'+id)
+    return this.http.delete('http://localhost:3000/delete/'+id)
     .map(res => res.json());
   }
 
